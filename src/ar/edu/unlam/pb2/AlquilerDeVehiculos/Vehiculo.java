@@ -1,6 +1,6 @@
 package ar.edu.unlam.pb2.AlquilerDeVehiculos;
 
-public abstract class Vehiculo implements Comparable <Vehiculo>{
+public abstract class Vehiculo {
 
 	// que se ordene por marca
 	

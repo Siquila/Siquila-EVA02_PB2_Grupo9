@@ -15,11 +15,20 @@ public class Turismo extends Vehiculo implements Renting{
 		return null;
 	}
 
+
 	@Override
-	public int compareTo(Vehiculo vehiculo) {
+	public void devolver(Cliente cliente) {
+		// TODO Auto-generated method stub
 		
-		return this.marca.compareToIgnoreCase(vehiculo.marca);
 	}
+
+	@Override
+	public void alquilar(Cliente cliente) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 
 

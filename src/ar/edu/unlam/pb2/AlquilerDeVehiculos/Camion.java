@@ -27,11 +27,22 @@ public class Camion extends Vehiculo implements Renting{
 		this.tieneGrua = tieneGrua;
 	}
 
+
+
 	@Override
-	public int compareTo(Vehiculo vehiculo) {
+	public void alquilar(Cliente cliente) {
+		// TODO Auto-generated method stub
 		
-		return this.marca.compareToIgnoreCase(vehiculo.marca);
 	}
+
+	@Override
+	public void devolver(Cliente cliente) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 
 
 
