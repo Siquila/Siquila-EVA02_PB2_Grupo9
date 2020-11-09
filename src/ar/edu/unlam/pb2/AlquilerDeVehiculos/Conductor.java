@@ -22,6 +22,7 @@ public class Conductor extends Persona{
 	}
 
 	public Licencias getTipoDeLicencia() {
+
 		return tipoDeLicencia;
 	}
 
