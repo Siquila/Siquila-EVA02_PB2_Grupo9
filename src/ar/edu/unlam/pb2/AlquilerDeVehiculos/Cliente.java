@@ -7,10 +7,11 @@ public class Cliente extends Persona{
 
 	public Cliente(String nombre, String apellido, Integer dni, Byte edad, Tarjetas tipoDeTarjeta) {
 		super(nombre, apellido, dni, edad);
-		// TODO Auto-generated constructor stub
 		this.setTipoDeTarjeta(tipoDeTarjeta);
 		this.alquilO = false;
 	}
+	
+	
 
 	public Boolean getAlquilO() {
 		return alquilO;
