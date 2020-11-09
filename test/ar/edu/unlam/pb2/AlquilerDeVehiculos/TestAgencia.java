@@ -12,7 +12,7 @@ public class TestAgencia {
 		Agencia agencia = new Agencia("agencia de prueba");
 		Cliente clienteNuevo = new Cliente("juan", "perez", 99333444, (byte) 21, Tarjetas.VISA);
 		Conductor conductorNuevo = new Conductor("juan", "perez", 99333444, (byte) 21, Licencias.TURISMO);
-		Turismo vehiculoAAgregar = new Turismo("ff111", "ASD123", "Reno", "AUDI", 4);
+		Turismo vehiculoAAgregar = new Turismo("ff111", "ASD123", "AUDI", "R8", 4);
 		
 		agencia.agregarCliente(clienteNuevo);
 		agencia.agregarConductor(conductorNuevo);
@@ -29,7 +29,7 @@ public class TestAgencia {
 		Agencia agencia = new Agencia("agencia de prueba");
 		Cliente clienteNuevo = new Cliente("juan", "perez", 99333444, (byte) 21, Tarjetas.VISA);
 		Conductor conductorNuevo = new Conductor("juan", "conductor", 99333444, (byte) 21, Licencias.TURISMO);
-		Turismo vehiculoAAgregar = new Turismo("ff111", "ASD123", "Reno", "AUDI", 4);
+		Turismo vehiculoAAgregar = new Turismo("ff111", "ASD123","AUDI", "R8", 4);
 		
 		agencia.agregarCliente(clienteNuevo);
 		agencia.agregarConductor(conductorNuevo);
@@ -44,13 +44,28 @@ public class TestAgencia {
 	public void queNoHayaDosClientesIguales() {
 		Agencia agencia = new Agencia("agencia de prueba");
 		Cliente clienteNuevo = new Cliente("juan", "perez", 99333444, (byte) 21, Tarjetas.VISA);
-		Cliente clienteDuplicado = new Cliente("juan", "perez", 99333444, (byte) 21, Tarjetas.VISA);
+		Cliente clienteNuevo2 = new Cliente("juan", "perez", 99333444, (byte) 21, Tarjetas.VISA);
 		
 		agencia.agregarCliente(clienteNuevo);
-		agencia.agregarCliente(clienteDuplicado);
+		agencia.agregarCliente(clienteNuevo2);
 
 		// no toma el hashcode? *******
-		assertEquals(agencia.clientes.size(),1);
+		assertEquals(1, agencia.clientes.size());
 	}
+	
+	@Test
+	public void queNoAlquileSiElConductorNoTieneLaLicenciaCorrecta() {
+		Agencia agencia = new Agencia("agencia de prueba");
+		Cliente clienteNuevo = new Cliente("juan", "perez", 99333444, (byte) 21, Tarjetas.VISA);
+		Conductor conductorNuevo = new Conductor("juan", "perez", 99333444, (byte) 21, Licencias.CAMION);
+		Turismo vehiculoAAgregar = new Turismo("ff111", "ASD123", "AUDI", "R8", 4);
+		
+		agencia.agregarCliente(clienteNuevo);
+		agencia.agregarConductor(conductorNuevo);
+		agencia.agregarVehiculo(vehiculoAAgregar);
+		
+		assertTrue(!agencia.alquilar(clienteNuevo, conductorNuevo, vehiculoAAgregar, 4));
+	}
+	
 	
 }
