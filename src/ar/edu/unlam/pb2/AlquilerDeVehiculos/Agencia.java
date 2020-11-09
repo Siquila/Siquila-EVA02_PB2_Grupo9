@@ -150,6 +150,25 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 	}
 		
 	return conductorEncontrado;
-	}	
+	}
+
+	public Double facturar(Cliente cliente, Integer diasAlquilados, Double kmRecorridos, Renting vehiculo){
+		Double precioFurgonetaDia = 80.50;
+		Double precioFurgonetaKm = 15.20;
+		Double precioCamionDia = 100.50;
+		Double precioCamionKm = 20.20;
+		Double precioFinal = 0.0;
+
+		if(buscarCliente(cliente)!= null){
+
+			if(vehiculo instanceof Furgoneta){
+				precioFinal	= precioFurgonetaDia * diasAlquilados + precioFurgonetaKm * kmRecorridos;
+			}
+			if(vehiculo instanceof Camion){
+				precioFinal = precioCamionDia * diasAlquilados + precioFurgonetaKm * kmRecorridos;
+			}
+		}
+		return precioFinal;
+	}
 
 }
