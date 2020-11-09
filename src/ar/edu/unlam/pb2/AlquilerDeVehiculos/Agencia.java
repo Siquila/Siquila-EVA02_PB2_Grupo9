@@ -13,10 +13,22 @@ public class Agencia {
 	 HashSet <Conductor> conductores = new HashSet <Conductor>();
 	 
 	 
+	 ///////************************/////	
 	 
+	 
+	 String nombre;
+	public Agencia(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public Boolean agregarVehiculo(Renting vehiculo){	
 	return vehiculos.add(vehiculo);
 	}
+	
+	
+	
+	////////***********************/////////
+	
 	
 	public Vehiculo buscarVehiculo(String id) {
 		Vehiculo vehiculoEncontrado = null;
@@ -26,6 +38,7 @@ public class Agencia {
 		}
 		return vehiculoEncontrado;
 	}		
+	
 		
 	public Boolean agregarCliente(Cliente nuevoCliente)	{
 			return clientes.add(nuevoCliente);
@@ -72,7 +85,8 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 			}
 		}
 	}
-	public void alquilar(Cliente cliente,Conductor conductor, Renting vehiculoAalquilar, Integer diasDeAlquiler)		{
+	public boolean alquilar(Cliente cliente,Conductor conductor, Renting vehiculoAalquilar, Integer diasDeAlquiler)		{
+		boolean sePudoAlquilar = false;
 		if(buscarCliente(cliente)!= null) {
 			
 			if(buscarVehiculo(((Vehiculo)vehiculoAalquilar).getId()) != null) {
@@ -80,23 +94,26 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 			
 				if(vehiculoAalquilar instanceof Turismo){
 					((Turismo)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);	
-				
+					sePudoAlquilar=true;
 					}
 					
 				if(vehiculoAalquilar instanceof Furgoneta){
 					((Furgoneta)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);
-					}
+					sePudoAlquilar=true;	
+				}
 			
-				else{
+				if(vehiculoAalquilar instanceof Camion){
 					((Camion)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);	
-					}
+					sePudoAlquilar=true;	
+				}
 			}
 		
 		}
-	
+		return sePudoAlquilar;
 	}
 	
-	public void devolver(Cliente cliente,Conductor conductor, Renting vehiculoAdevolver, Double kmActual)		{
+	public boolean devolver(Cliente cliente,Conductor conductor, Renting vehiculoAdevolver, Double kmActual)		{
+		boolean sePudoDevolver = false;
 		if(buscarCliente(cliente)!= null) {
 			
 			if(buscarVehiculo(((Vehiculo)vehiculoAdevolver).getId()) != null) {
@@ -104,19 +121,22 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 			
 				if(vehiculoAdevolver instanceof Turismo){
 					((Turismo)vehiculoAdevolver).devolver(cliente,kmActual);	
-				
+					sePudoDevolver=true;
 					}
 					
 				if(vehiculoAdevolver instanceof Furgoneta){
 					((Furgoneta)vehiculoAdevolver).devolver(cliente,kmActual);
+					sePudoDevolver=true;
 					}
 			
-				else{
+				if(vehiculoAdevolver instanceof Camion){
 					((Camion)vehiculoAdevolver).devolver(cliente,kmActual);	
+					sePudoDevolver=true;
 					}
 			}
 		
 		}
+		return sePudoDevolver;
 	
 	}
 	

@@ -34,7 +34,8 @@ public class Turismo extends Vehiculo implements Renting{
 
 		if (!cliente.getAlquilO()) {
 			this.diasDeAlquiler = diasDeAlquiler;
-	
+			//cliente.setAlquilO(true); ///AGREGADO
+			//this.disponible = false;
 			alquilado = true;
 			
 		}
@@ -48,6 +49,7 @@ public class Turismo extends Vehiculo implements Renting{
 			this.kmRecorridos = this.kilometrosInicial - kmActual;
 			this.kilometrosInicial = this.kmRecorridos;		
 			devuelto= true;
+			//cliente.setAlquilO(false); ///AGREGADO
 			}
 			
 			return devuelto;
