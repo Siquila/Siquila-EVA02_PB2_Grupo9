@@ -1,7 +1,7 @@
 package ar.edu.unlam.pb2.AlquilerDeVehiculos;
 
-public class Persona implements Comparable <Persona>{
-	//que se ordenen por nombre
+public class Persona {
+	
 	protected String nombre;
 	protected String apellido;
 	protected Integer dni;
@@ -14,6 +14,52 @@ public class Persona implements Comparable <Persona>{
 		this.dni = dni;
 		this.edad = edad;
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
+		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
+		result = prime * result + ((edad == null) ? 0 : edad.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		if (apellido == null) {
+			if (other.apellido != null)
+				return false;
+		} else if (!apellido.equals(other.apellido))
+			return false;
+		if (dni == null) {
+			if (other.dni != null)
+				return false;
+		} else if (!dni.equals(other.dni))
+			return false;
+		if (edad == null) {
+			if (other.edad != null)
+				return false;
+		} else if (!edad.equals(other.edad))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
+
+
 
 
 	public String getNombre() {
@@ -47,13 +93,4 @@ public class Persona implements Comparable <Persona>{
 	public void setEdad(Byte edad) {
 		this.edad = edad;
 	}
-
-
-	@Override
-	public int compareTo(Persona persona) {
-		
-	return this.nombre.compareToIgnoreCase(persona.nombre);
-	}
-
-	
 }
