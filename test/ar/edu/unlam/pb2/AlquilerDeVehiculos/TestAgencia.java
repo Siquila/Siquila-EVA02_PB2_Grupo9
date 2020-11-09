@@ -49,7 +49,7 @@ public class TestAgencia {
 		agencia.agregarCliente(clienteNuevo);
 		agencia.agregarCliente(clienteNuevo2);
 
-		// no toma el hashcode? *******
+		
 		assertEquals(1, agencia.clientes.size());
 	}
 	
