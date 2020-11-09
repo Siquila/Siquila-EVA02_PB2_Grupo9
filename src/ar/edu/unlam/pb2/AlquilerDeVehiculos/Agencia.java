@@ -13,14 +13,15 @@ public class Agencia {
 	 HashSet <Conductor> conductores = new HashSet <Conductor>();
 	 
 	 
+	 
 	public Boolean agregarVehiculo(Renting vehiculo){	
 	return vehiculos.add(vehiculo);
 	}
 	
-	public Vehiculo buscarVehiculo(String matricula) {
+	public Vehiculo buscarVehiculo(String id) {
 		Vehiculo vehiculoEncontrado = null;
 		for(int i=0;i<vehiculos.size();i++){
-			if(((Vehiculo)vehiculos.get(i)).getMatricula().equals(matricula))		
+			if(((Vehiculo)vehiculos.get(i)).getId().equals(id))		
 				vehiculoEncontrado=(Vehiculo)vehiculos.get(i);			
 		}
 		return vehiculoEncontrado;
@@ -30,7 +31,7 @@ public class Agencia {
 			return clientes.add(nuevoCliente);
 		}	
 	
-	// no busca por dni, cambie porque en un hashset no puedo usar el metodo get() como en el list
+	
 	public Cliente buscarCliente(Cliente clienteAbuscar)	{
 		Cliente clienteEncontrado = null;
 		if(clientes.contains(clienteAbuscar)) {
@@ -39,24 +40,79 @@ public class Agencia {
 			
 		return clienteEncontrado;
 	}	
+	
+	private void asignarConductor(Conductor conductor, String idVehiculo) {
+		
+		if (conductores.contains(conductor)) {	
+		
+		if(buscarVehiculo(idVehiculo) != null){
+			conductor.setDisponible(false);
+			conductor.setVehiculoAsignado(idVehiculo);
+			for(int i=0;i<vehiculos.size();i++){
+				if(((Vehiculo)vehiculos.get(i)).getId().equals(idVehiculo))		
+					((Vehiculo)vehiculos.get(i)).setDisponible(false);;			
+			}
+			
+			}
+		}
+	}
 
-	public void alquilar(Cliente cliente, Vehiculo vehiculo)		{
+private void librarConductor(Conductor conductor, String idVehiculo) {
+		
+		if (conductores.contains(conductor)) {	
+		
+		if(buscarVehiculo(idVehiculo) != null){
+			conductor.setDisponible(true);
+			conductor.setVehiculoAsignado(" ");
+			for(int i=0;i<vehiculos.size();i++){
+				if(((Vehiculo)vehiculos.get(i)).getId().equals(idVehiculo))		
+					((Vehiculo)vehiculos.get(i)).setDisponible(true);;			
+			}
+			
+			}
+		}
+	}
+	public void alquilar(Cliente cliente,Conductor conductor, Renting vehiculoAalquilar, Integer diasDeAlquiler)		{
 		if(buscarCliente(cliente)!= null) {
 			
-			if(buscarVehiculo(vehiculo.getMatricula()) != null) {
-				
+			if(buscarVehiculo(((Vehiculo)vehiculoAalquilar).getId()) != null) {
+				asignarConductor (conductor,((Vehiculo)vehiculoAalquilar).id);
 			
-				if(vehiculo instanceof Turismo){
-					((Turismo)vehiculo).alquilar(cliente);	
+				if(vehiculoAalquilar instanceof Turismo){
+					((Turismo)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);	
 				
 					}
 					
-				if(vehiculo instanceof Furgoneta){
-					((Furgoneta)vehiculo).alquilar(cliente);
+				if(vehiculoAalquilar instanceof Furgoneta){
+					((Furgoneta)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);
 					}
 			
 				else{
-					((Camion)vehiculo).alquilar(cliente);	
+					((Camion)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);	
+					}
+			}
+		
+		}
+	
+	}
+	
+	public void devolver(Cliente cliente,Conductor conductor, Renting vehiculoAdevolver, Double kmActual)		{
+		if(buscarCliente(cliente)!= null) {
+			
+			if(buscarVehiculo(((Vehiculo)vehiculoAdevolver).getId()) != null) {
+				librarConductor( conductor, ((Vehiculo)vehiculoAdevolver).id);
+			
+				if(vehiculoAdevolver instanceof Turismo){
+					((Turismo)vehiculoAdevolver).devolver(cliente,kmActual);	
+				
+					}
+					
+				if(vehiculoAdevolver instanceof Furgoneta){
+					((Furgoneta)vehiculoAdevolver).devolver(cliente,kmActual);
+					}
+			
+				else{
+					((Camion)vehiculoAdevolver).devolver(cliente,kmActual);	
 					}
 			}
 		
