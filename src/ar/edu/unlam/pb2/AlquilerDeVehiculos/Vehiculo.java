@@ -14,6 +14,7 @@ public abstract class Vehiculo {
 	protected Integer diasDeAlquiler;
 	protected Double precioPorDia;
 	protected Double kilometrosInicial;
+	protected Double kmRecorridos;
 	protected Double precioPorKilometro;
 	
 	protected Vehiculo(String id, String matricula, String marca, String modelo, Integer numeroDePuertas) {
@@ -32,6 +33,14 @@ public abstract class Vehiculo {
 		return matricula;
 	}
 	
+	public Double getKmRecorridos() {
+		return kmRecorridos;
+	}
+
+	public void setKmRecorridos(Double kmRecorridos) {
+		this.kmRecorridos = kmRecorridos;
+	}
+
 	public String getId() {
 		return id;
 	}

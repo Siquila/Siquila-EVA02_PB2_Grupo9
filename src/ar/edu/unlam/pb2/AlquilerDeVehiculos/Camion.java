@@ -6,17 +6,18 @@ public class Camion extends Vehiculo implements Renting{
 	
 	public Camion(String id, String matricula, String marca, String modelo, Integer numeroDePuertas,  Boolean tieneGrua) {
 		super(id, matricula, marca, modelo,  numeroDePuertas);
-		// TODO Auto-generated constructor stub
+		
 		this.tieneGrua = tieneGrua;
 		this.precioPorDia = 100.50;
 		this.precioPorKilometro = 20.20;
+		this.disponible = true;
 		
 	}
 
 	@Override
 	protected String mostrarDetalles() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "Id: "+ this.id+" - "+"Marca: "+this.marca+ " - "+"Modelo:"+this.modelo+ " - "+"Tiene Grua: "+this.tieneGrua+" - "+"Matricula: "+this.matricula+ " - "+"Disponible: "+this.disponible;
 	}
 
 	public Boolean getTieneGrua() {
@@ -28,18 +29,33 @@ public class Camion extends Vehiculo implements Renting{
 	}
 
 
-
 	@Override
-	public void alquilar(Cliente cliente) {
-		// TODO Auto-generated method stub
+	public Boolean devolver(Cliente cliente, Double kmActual) {
+		Boolean devuelto = false;
+		if(cliente.getAlquilO()) {
+		this.kmRecorridos = this.kilometrosInicial - kmActual;
+		this.kilometrosInicial = this.kmRecorridos;		
+		devuelto= true;
+		}
 		
+		return devuelto;
 	}
 
 	@Override
-	public void devolver(Cliente cliente) {
-		// TODO Auto-generated method stub
-		
+	public Boolean alquilar(Cliente cliente, Integer diasDeAlquiler) {
+		Boolean alquilado =false;
+		Double plus= 50.0;
+		if (!cliente.getAlquilO()) {
+			this.diasDeAlquiler = diasDeAlquiler;		
+			alquilado = true;
+		if (this.tieneGrua) {
+			this.precioPorDia += plus;
+		}
+			
+		}
+		return alquilado;
 	}
+
 	
 	
 	

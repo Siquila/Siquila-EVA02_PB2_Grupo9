@@ -3,13 +3,22 @@ package ar.edu.unlam.pb2.AlquilerDeVehiculos;
 public class Conductor extends Persona{
 	
 	private Licencias tipoDeLicencia;
+	private String vehiculoAsignado;
 	private Boolean disponible;
 	
-	public Conductor(String nombre, String apellido, Integer dni, Byte edad,Licencias tipoDeLicencia,  Boolean disponible) {
+	public Conductor(String nombre, String apellido, Integer dni, Byte edad,Licencias tipoDeLicencia) {
 		super(nombre, apellido, dni, edad);
-		// TODO Auto-generated constructor stub
-		this.setDisponible(disponible);
+		this.vehiculoAsignado = " ";
+		this.disponible=true;
 		this.tipoDeLicencia = tipoDeLicencia;
+	}
+
+	public String getVehiculoAsignado() {
+		return vehiculoAsignado;
+	}
+
+	public void setVehiculoAsignado(String vehiculoAsignado) {
+		this.vehiculoAsignado = vehiculoAsignado;
 	}
 
 	public Licencias getTipoDeLicencia() {
