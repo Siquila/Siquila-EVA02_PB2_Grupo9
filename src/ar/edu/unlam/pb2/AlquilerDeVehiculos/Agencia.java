@@ -41,7 +41,9 @@ public class Agencia {
 	
 		
 	public Boolean agregarCliente(Cliente nuevoCliente)	{
-			return clientes.add(nuevoCliente);
+			if(nuevoCliente.getEdad()>=18)
+				return clientes.add(nuevoCliente);
+			return false;
 		}	
 	
 	
