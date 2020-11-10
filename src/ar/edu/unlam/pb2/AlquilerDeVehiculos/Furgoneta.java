@@ -2,12 +2,13 @@ package ar.edu.unlam.pb2.AlquilerDeVehiculos;
 
 public class Furgoneta extends Vehiculo implements Renting{
 
-	public Furgoneta(String id, String matricula, String marca, String modelo, Integer numeroDePuertas) {
-		super(id, matricula, marca, modelo, numeroDePuertas);
+	public Furgoneta(String id, String matricula, String marca, String modelo, Integer numeroDePuertas, Double kmInicial) {
+		super(id, matricula, marca, modelo, numeroDePuertas, kmInicial);
 		
 		this.precioPorDia = 80.50;
 		this.precioPorKilometro = 15.20;
 		this.disponible =true;
+		this.kilometrosInicial = kmInicial;
 	}
 
 	@Override

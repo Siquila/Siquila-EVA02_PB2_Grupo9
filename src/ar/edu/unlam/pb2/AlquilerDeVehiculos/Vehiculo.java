@@ -17,7 +17,7 @@ public abstract class Vehiculo {
 	protected Double kmRecorridos;
 	protected Double precioPorKilometro;
 	
-	protected Vehiculo(String id, String matricula, String marca, String modelo, Integer numeroDePuertas) {
+	protected Vehiculo(String id, String matricula, String marca, String modelo, Integer numeroDePuertas, Double kmInicial) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -25,6 +25,7 @@ public abstract class Vehiculo {
 		this.modelo = modelo;
 		this.numeroDePuertas = numeroDePuertas;
 		this.disponible = true;
+		this.kilometrosInicial = kmInicial;
 	}
 
 	protected abstract String mostrarDetalles();
@@ -117,6 +118,5 @@ public abstract class Vehiculo {
 	public void setKilometrosInicial(Double kilometrosInicial) {
 		this.kilometrosInicial = kilometrosInicial;
 	}
-	
-	
+
 }

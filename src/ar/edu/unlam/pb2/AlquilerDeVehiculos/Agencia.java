@@ -88,22 +88,26 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 	public Boolean alquilar(Cliente cliente,Conductor conductor, Renting vehiculoAalquilar, Integer diasDeAlquiler)		{
 		Boolean sePudoAlquilar = false;
 		if(buscarCliente(cliente)!= null) {
+
 			
 			if(buscarVehiculo(((Vehiculo)vehiculoAalquilar).getId()) != null) {
 				asignarConductor (conductor,((Vehiculo)vehiculoAalquilar).id);
+				cliente.setAlquilO(true);
 			
 				if(vehiculoAalquilar instanceof Turismo && conductor.getTipoDeLicencia()==Licencias.TURISMO){
-					((Turismo)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);	
+					((Turismo)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);
 					sePudoAlquilar=true;
 					}
 					
 				if(vehiculoAalquilar instanceof Furgoneta && conductor.getTipoDeLicencia()==Licencias.FURGONETA){
 					((Furgoneta)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);
+
 					sePudoAlquilar=true;	
 				}
 			
 				if(vehiculoAalquilar instanceof Camion && conductor.getTipoDeLicencia()==Licencias.CAMION){
-					((Camion)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);	
+					((Camion)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);
+
 					sePudoAlquilar=true;	
 				}
 			}
@@ -118,19 +122,22 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 			
 			if(buscarVehiculo(((Vehiculo)vehiculoAdevolver).getId()) != null) {
 				librarConductor( conductor, ((Vehiculo)vehiculoAdevolver).id);
-			
+
 				if(vehiculoAdevolver instanceof Turismo){
-					((Turismo)vehiculoAdevolver).devolver(cliente,kmActual);	
+					((Turismo)vehiculoAdevolver).devolver(cliente,kmActual);
+					cliente.setAlquilO(false);
 					sePudoDevolver=true;
 					}
 					
 				if(vehiculoAdevolver instanceof Furgoneta){
 					((Furgoneta)vehiculoAdevolver).devolver(cliente,kmActual);
+					cliente.setAlquilO(false);
 					sePudoDevolver=true;
 					}
 			
 				if(vehiculoAdevolver instanceof Camion){
-					((Camion)vehiculoAdevolver).devolver(cliente,kmActual);	
+					((Camion)vehiculoAdevolver).devolver(cliente,kmActual);
+					cliente.setAlquilO(false);
 					sePudoDevolver=true;
 					}
 			}
@@ -141,6 +148,7 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 	}
 	
 	public Boolean agregarConductor(Conductor conductor)	{
+
 		return conductores.add(conductor);
 	}
 	public Conductor buscarConductor(Conductor conductorAbuscar) {
@@ -157,6 +165,8 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 		Double precioFurgonetaKm = 15.20;
 		Double precioCamionDia = 100.50;
 		Double precioCamionKm = 20.20;
+		Double precioTruismoDia = 100.50;
+		Double precioTurismoKm = 20.20;
 		Double precioFinal = 0.0;
 
 		if(buscarCliente(cliente)!= null){
@@ -167,8 +177,12 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 			if(vehiculo instanceof Camion){
 				precioFinal = precioCamionDia * diasAlquilados + precioFurgonetaKm * kmRecorridos;
 			}
+			if(vehiculo instanceof Turismo){
+				precioFinal = precioTruismoDia * diasAlquilados + precioTurismoKm * kmRecorridos;
+			}
 		}
 		return precioFinal;
 	}
+
 
 }

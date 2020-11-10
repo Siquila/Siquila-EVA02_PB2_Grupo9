@@ -4,14 +4,14 @@ public class Camion extends Vehiculo implements Renting{
 	
 	private Boolean tieneGrua;
 	
-	public Camion(String id, String matricula, String marca, String modelo, Integer numeroDePuertas,  Boolean tieneGrua) {
-		super(id, matricula, marca, modelo,  numeroDePuertas);
+	public Camion(String id, String matricula, String marca, String modelo, Integer numeroDePuertas, Double kmInicial,  Boolean tieneGrua) {
+		super(id, matricula, marca, modelo,  numeroDePuertas, kmInicial);
 		
 		this.tieneGrua = tieneGrua;
 		this.precioPorDia = 100.50;
 		this.precioPorKilometro = 20.20;
 		this.disponible = true;
-		
+		this.kilometrosInicial = kmInicial;
 	}
 
 	@Override

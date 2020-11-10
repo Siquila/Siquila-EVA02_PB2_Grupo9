@@ -4,13 +4,15 @@ public class Turismo extends Vehiculo implements Renting{
 	
 	private Integer cantidadDeAsientos;
 
-	public Turismo(String id, String matricula, String marca, String modelo,Integer numeroDePuertas) {
-		super(id, matricula, marca, modelo, numeroDePuertas);
+	public Turismo(String id, String matricula, String marca, String modelo,Integer numeroDePuertas, Double kmInicial) {
+		super(id, matricula, marca, modelo, numeroDePuertas, kmInicial);
 		
 		this.precioPorDia = 100.50;
 		this.precioPorKilometro = 20.20;
 		this.cantidadDeAsientos=32;
 		this.disponible = true;
+		this.kilometrosInicial = kmInicial;
+
 	}
 
 	public Integer getCantidadDeAsientos() {
@@ -44,8 +46,7 @@ public class Turismo extends Vehiculo implements Renting{
 	public Boolean devolver(Cliente cliente, Double kmActual) {
 		Boolean devuelto = false;
 		if(cliente.getAlquilO()) {
-			this.kmRecorridos = this.kilometrosInicial - kmActual;
-			this.kilometrosInicial = this.kmRecorridos;		
+			setKilometrosInicial(kmActual);
 			devuelto= true;
 			}
 			
