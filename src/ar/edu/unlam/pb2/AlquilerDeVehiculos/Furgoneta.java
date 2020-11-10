@@ -35,9 +35,9 @@ public class Furgoneta extends Vehiculo implements Renting{
 	public Boolean devolver(Cliente cliente, Double kmActual) {
 		Boolean devuelto = false;
 		if(cliente.getAlquilO()) {
-		this.kmRecorridos = this.kilometrosInicial - kmActual;
-		this.kilometrosInicial = this.kmRecorridos;		
-		devuelto= true;
+			this.setKmRecorridos(kmActual - this.kilometrosInicial);
+			this.kilometrosInicial += this.kmRecorridos;
+			devuelto= true;
 		}
 		
 		return devuelto;

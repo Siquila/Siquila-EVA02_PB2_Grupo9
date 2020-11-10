@@ -97,17 +97,20 @@ private void librarConductor(Conductor conductor, String idVehiculo) {
 				cliente.setAlquilO(true);
 			
 				if(vehiculoAalquilar instanceof Turismo && conductor.getTipoDeLicencia()==Licencias.TURISMO){
+					((Turismo)vehiculoAalquilar).setDiasDeAlquiler(diasDeAlquiler);
 					((Turismo)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);
 					sePudoAlquilar=true;
 					}
 					
 				if(vehiculoAalquilar instanceof Furgoneta && conductor.getTipoDeLicencia()==Licencias.FURGONETA){
+					((Turismo)vehiculoAalquilar).setDiasDeAlquiler(diasDeAlquiler);
 					((Furgoneta)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);
 
 					sePudoAlquilar=true;	
 				}
 			
 				if(vehiculoAalquilar instanceof Camion && conductor.getTipoDeLicencia()==Licencias.CAMION){
+					((Turismo)vehiculoAalquilar).setDiasDeAlquiler(diasDeAlquiler);
 					((Camion)vehiculoAalquilar).alquilar(cliente,diasDeAlquiler);
 
 					sePudoAlquilar=true;	

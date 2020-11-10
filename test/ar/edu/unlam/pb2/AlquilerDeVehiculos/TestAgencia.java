@@ -171,6 +171,48 @@ public class TestAgencia {
 		assertEquals(veinte, vehiculoAAgregar.getKilometrosInicial(), 0.01);
 	}
 
+	@Test
+	public void queUnaVezDevueltoUnVehiculoMuestreLosKmRecorridos() {
+		Agencia agencia = new Agencia("agencia de prueba");
+		Cliente clienteNuevo = new Cliente("juan", "perez", 99333444, (byte) 21, Tarjetas.VISA);
+		Conductor conductorNuevo = new Conductor("juan", "perez", 99333444, (byte) 21, Licencias.TURISMO);
+		Turismo vehiculoAAgregar = new Turismo("ff111", "ASD123", "AUDI", "R8", 4, 50.0);
+
+
+		agencia.agregarCliente(clienteNuevo);
+		agencia.agregarConductor(conductorNuevo);
+		agencia.agregarVehiculo(vehiculoAAgregar);
+
+		agencia.alquilar(clienteNuevo, conductorNuevo, vehiculoAAgregar, 4);
+		Double kmQueFigurenEnElKilometraje = 100.0;
+		agencia.devolver(clienteNuevo, conductorNuevo,vehiculoAAgregar, kmQueFigurenEnElKilometraje);
+		Double valorEsperado = 50.0;
+		Double kmRecorridos = vehiculoAAgregar.getKmRecorridos();
+
+		assertEquals(valorEsperado, kmRecorridos);
+	}
+
+	@Test
+	public void queUnaVezAlquiladoUnVehiculoMuestreLosDiasDeAlquiler () {
+		Agencia agencia = new Agencia("agencia de prueba");
+		Cliente clienteNuevo = new Cliente("juan", "perez", 99333444, (byte) 21, Tarjetas.VISA);
+		Conductor conductorNuevo = new Conductor("juan", "perez", 99333444, (byte) 21, Licencias.TURISMO);
+		Turismo vehiculoAAgregar = new Turismo("ff111", "ASD123", "AUDI", "R8", 4, 0.0);
+
+
+		agencia.agregarCliente(clienteNuevo);
+		agencia.agregarConductor(conductorNuevo);
+		agencia.agregarVehiculo(vehiculoAAgregar);
+
+		agencia.alquilar(clienteNuevo, conductorNuevo, vehiculoAAgregar, 4);
+		Integer valorEsperado = 4;
+		Integer diasDeAlquiler=vehiculoAAgregar.getDiasDeAlquiler();
+
+		assertEquals(valorEsperado, diasDeAlquiler);
+	}
+
+
+
 
 
 

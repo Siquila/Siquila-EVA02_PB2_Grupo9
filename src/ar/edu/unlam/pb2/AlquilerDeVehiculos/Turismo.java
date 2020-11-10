@@ -46,7 +46,8 @@ public class Turismo extends Vehiculo implements Renting{
 	public Boolean devolver(Cliente cliente, Double kmActual) {
 		Boolean devuelto = false;
 		if(cliente.getAlquilO()) {
-			setKilometrosInicial(kmActual);
+			this.setKmRecorridos(kmActual - this.kilometrosInicial);
+			this.kilometrosInicial += this.kmRecorridos;
 			devuelto= true;
 			}
 			
