@@ -15,6 +15,14 @@ public class TestAgencia {
 
 		assertTrue(agencia.agregarCliente(clienteNuevo));
 	}
+	
+	@Test
+	public void queNoSeAgreguenClientesMenoresDeEdad(){
+		Agencia agencia = new Agencia("agencia de prueba");
+		Cliente clienteNuevo = new Cliente("juan", "perez", 99333444, (byte) 15, Tarjetas.VISA);
+
+		assertTrue(!agencia.agregarCliente(clienteNuevo));
+	}
 
 	@Test
 	public void queSePuedaAgregarUnConductor(){
